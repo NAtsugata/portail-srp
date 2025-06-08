@@ -65,7 +65,7 @@ const LoginScreen = ({ onLogin, users }) => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-50">
+        <div className="flex items-center justify-center min-h-screen">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold text-slate-800">Entreprise SRP</h1>
@@ -229,16 +229,61 @@ const EmployeePlanningView = ({ interventions, onSelectIntervention }) => (
 );
 
 
-const EmployeeLeaveView = ({ leaveRequests }) => {
+const EmployeeLeaveView = ({ leaveRequests, onSubmitRequest, userName }) => {
+    const [showForm, setShowForm] = useState(false);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [reason, setReason] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(!startDate || !endDate || !reason) {
+            alert("Veuillez remplir tous les champs.");
+            return;
+        }
+        onSubmitRequest({
+            userName: userName,
+            startDate,
+            endDate,
+            reason
+        });
+        setShowForm(false);
+        setStartDate('');
+        setEndDate('');
+        setReason('');
+    };
     const statusColorMap = { "Approuvé": "bg-green-100 text-green-800", "En attente": "bg-yellow-100 text-yellow-800", "Rejeté": "bg-red-100 text-red-800" };
     return (
         <div>
-            <h2 className="text-3xl font-bold text-slate-800 mb-6">Vos Demandes de Congés</h2>
+            <div className="flex justify-between items-center mb-6">
+                <h2 className="text-3xl font-bold text-slate-800">Vos Demandes de Congés</h2>
+                <button onClick={() => setShowForm(!showForm)} className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 flex items-center gap-2"><PlusIcon/>{showForm ? 'Annuler' : 'Nouvelle Demande'}</button>
+            </div>
+            {showForm && (
+                 <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow mb-6 space-y-4 animate-fade-in">
+                    <h3 className="text-xl font-bold text-slate-700">Nouvelle demande de congé</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700">Date de début</label>
+                            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} required className="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm"/>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700">Date de fin</label>
+                            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} required className="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700">Motif de la demande</label>
+                        <textarea value={reason} onChange={e => setReason(e.target.value)} required rows="3" className="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm"></textarea>
+                    </div>
+                    <button type="submit" className="w-full py-2 font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700">Envoyer la demande</button>
+                </form>
+            )}
             <div className="bg-white p-6 rounded-lg shadow-md">
+                 <h3 className="text-xl font-semibold text-slate-800 mb-4">Historique de vos demandes</h3>
                  <ul className="divide-y divide-slate-200">
                     {leaveRequests.map(req => (<li key={req.id} className="py-4 flex justify-between items-center"><div><p className="font-semibold text-slate-800">{req.reason}</p><p className="text-sm text-slate-500">Du {req.startDate} au {req.endDate}</p></div><GenericStatusBadge status={req.status} colorMap={statusColorMap} /></li>))}
                 </ul>
-                <button className="mt-4 w-full py-2 border-2 border-dashed border-slate-300 rounded-lg text-slate-500 hover:bg-slate-100 transition">Faire une nouvelle demande</button>
             </div>
         </div>
     );
@@ -525,207 +570,226 @@ const AdminVaultView = ({ users, allPayslips, onAddPayslip }) => {
     const handleAddSubmit = (e) => { e.preventDefault(); if(!formUserId || !formMonth || !formDate) { alert("Veuillez remplir tous les champs."); return; } onAddPayslip({userId: formUserId, payslip: { id: `FP-${Date.now()}`, month: formMonth, date: formDate, url: "#"}}); setShowAddForm(false); setFormUserId(''); setFormMonth(''); setFormDate(''); };
     const employees = Object.values(users).filter(u => !u.isAdmin);
     return (<div><div className="flex justify-between items-center mb-6"><h3 className="text-xl font-bold text-slate-800">Gestion des Coffres-forts</h3><button onClick={() => setShowAddForm(!showAddForm)} className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">{showAddForm ? 'Annuler' : 'Ajouter Fiche de Paie'}</button></div>{showAddForm && (<div className="bg-white p-6 rounded-lg shadow-md mb-6"><form onSubmit={handleAddSubmit} className="space-y-4"><h3 className="text-xl font-semibold text-slate-800">Ajouter une Fiche de Paie</h3><div><label>Employé</label><select value={formUserId} onChange={e => setFormUserId(e.target.value)} required className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div><div className="grid md:grid-cols-2 gap-4"><div><label>Mois (ex: Juin 2025)</label><input type="text" value={formMonth} onChange={e => setFormMonth(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div><div><label>Date de réception</label><input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div></div><div><label>Fichier PDF</label><input type="file" className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/></div><button type="submit" className="w-full py-2 font-semibold text-white bg-blue-600 rounded-lg">Valider</button></form></div>)}{<div className="bg-white p-6 rounded-lg shadow-md"> <h3 className="text-xl font-semibold text-slate-800 mb-4">Consulter un coffre-fort</h3><div><label>Sélectionner un employé</label><select value={selectedUserId} onChange={e => setSelectedUserId(e.target.value)} className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div>{selectedUserId && (<div className="mt-6"><h4 className="font-semibold">Documents pour {(Object.values(users).find(u=>u.id === selectedUserId) || {name: 'Inconnu'}).name}</h4><ul className="divide-y mt-2">{(allPayslips[selectedUserId] || []).length > 0 ? (allPayslips[selectedUserId] || []).map(doc => <li key={doc.id} className="py-3 flex justify-between items-center"><div><p>{doc.month}</p><p className="text-sm text-slate-500">{doc.date}</p></div><a href={doc.url} download className="text-blue-500 hover:underline text-sm">Télécharger</a></li>) : <p className="text-slate-500 mt-2">Aucun document.</p>}</ul></div>)}</div>}</div>);
-};
+        };
 
-const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention }) => {
-    const [adminView, setAdminView] = useState('dashboard');
-    const adminTabs = [
-        { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboardIcon /> },
-        { id: 'planning', label: 'Planning', icon: <BriefcaseIcon /> },
-        { id: 'leaves', label: 'Congés', icon: <SunIcon /> },
-        { id: 'users', label: 'Employés', icon: <UsersIcon /> },
-        { id: 'vaults', label: 'Coffres-forts', icon: <LockIcon /> },
-        { id: 'archives', label: 'Archives', icon: <ArchiveIcon /> },
-    ];
+        const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention }) => {
+            const [adminView, setAdminView] = useState('dashboard');
+            const adminTabs = [
+                { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboardIcon /> },
+                { id: 'planning', label: 'Planning', icon: <BriefcaseIcon /> },
+                { id: 'leaves', label: 'Congés', icon: <SunIcon /> },
+                { id: 'users', label: 'Employés', icon: <UsersIcon /> },
+                { id: 'vaults', label: 'Coffres-forts', icon: <LockIcon /> },
+                { id: 'archives', label: 'Archives', icon: <ArchiveIcon /> },
+            ];
 
-    return (
-        <div>
-            <div className="mb-6 border-b border-slate-200">
-                <nav className="-mb-px flex space-x-6 overflow-x-auto">
-                    {adminTabs.map(tab => (
-                        <button key={tab.id} onClick={() => setAdminView(tab.id)} className={`whitespace-nowrap flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${adminView === tab.id ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>
-                           {tab.icon} {tab.label}
-                        </button>
-                    ))}
-                </nav>
-            </div>
-            {adminView === 'dashboard' && <AdminDashboard interventions={interventions} leaveRequests={leaveRequests} />}
-            {adminView === 'planning' && <AdminPlanningView interventions={interventions.filter(i => !i.isArchived)} users={users} onAddIntervention={onAddIntervention} onArchive={onArchiveIntervention} onDelete={onDeleteIntervention} />}
-            {adminView === 'leaves' && <AdminLeaveView leaveRequests={leaveRequests} onUpdateRequestStatus={onUpdateLeaveStatus} />}
-            {adminView === 'users' && <AdminUserView users={users} currentUser={currentUser} onAddUser={onAddUser} onUpdateUser={onUpdateUser} onDeleteUser={onDeleteUser} />}
-            {adminView === 'vaults' && <AdminVaultView users={users} allPayslips={payslips} onAddPayslip={onAddPayslip} />}
-            {adminView === 'archives' && <AdminArchivesView interventions={interventions.filter(i => i.isArchived)} users={users} />}
-        </div>
-    );
-};
-
-
-// --- Application principale ---
-export default function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [currentView, setCurrentView] = useState('planning');
-  const [selectedIntervention, setSelectedIntervention] = useState(null);
-  
-  const [users, setUsers] = useState(initialUsersData);
-  const [interventions, setInterventions] = useState(initialInterventionsData);
-  const [payslips, setPayslips] = useState(initialPayslipsData);
-  const [leaveRequests, setLeaveRequests] = useState(initialLeaveRequestsData);
-  
-  const handleLogin = (user) => {
-      setCurrentUser(user);
-      setCurrentView(user.isAdmin ? 'admin' : 'planning');
-  };
-  const handleLogout = () => {
-    setCurrentUser(null);
-    setSelectedIntervention(null);
-  };
-  
-  const handleAddUser = (newUser) => {
-    if(users[newUser.username]){
-        alert("Cet identifiant est déjà pris.");
-        return;
-    }
-    setUsers(prev => ({...prev, [newUser.username]: newUser}));
-    alert("Employé ajouté avec succès !");
-  };
-  
-  const handleUpdateUser = (updatedUserData) => {
-      const oldUsername = Object.keys(users).find(key => users[key].id === updatedUserData.id);
-      if (!oldUsername) return;
-      const newUsername = updatedUserData.username;
-      
-      setUsers(prev => {
-          const newUsers = { ...prev };
-          let userToUpdate = { ...newUsers[oldUsername] };
-          userToUpdate.name = updatedUserData.name;
-          userToUpdate.username = newUsername; 
-
-          if (updatedUserData.newPassword) {
-              userToUpdate.password = updatedUserData.newPassword;
-          }
-          
-          if (oldUsername !== newUsername) {
-              if (newUsers[newUsername] && newUsers[newUsername].id !== updatedUserData.id) {
-                  alert("Le nouvel identifiant est déjà utilisé.");
-                  return prev;
-              }
-              delete newUsers[oldUsername];
-              newUsers[newUsername] = userToUpdate;
-          } else {
-              newUsers[oldUsername] = userToUpdate;
-          }
-          
-          if(userToUpdate.isAdmin) {
-              setCurrentUser(userToUpdate);
-          }
-          return newUsers;
-      });
-      alert("Compte mis à jour avec succès !");
-  };
-
-  const handleDeleteUser = (userIdToDelete, adminPassword) => {
-      if (adminPassword !== currentUser.password) {
-          alert("Mot de passe incorrect. Suppression annulée.");
-          return;
-      }
-      if (window.confirm("Êtes-vous sûr de vouloir supprimer cet employé ? Cette action est irréversible.")) {
-          const usernameToDelete = Object.keys(users).find(key => users[key].id === userIdToDelete);
-          if (usernameToDelete) {
-              const newUsers = { ...users };
-              delete newUsers[usernameToDelete];
-              setUsers(newUsers);
-              alert("Employé supprimé.");
-          }
-      }
-  };
-  
-  const handleAddIntervention = (intervention) => setInterventions(prev => [...prev, intervention].sort((a,b) => new Date(a.date) - new Date(b.date)));
-  const handleUpdateLeaveStatus = (requestId, status) => setLeaveRequests(prev => prev.map(req => req.id === requestId ? { ...req, status } : req));
-  const handleAddPayslip = ({ userId, payslip }) => {
-      setPayslips(prev => ({ ...prev, [userId]: [...(prev[userId] || []), payslip] }));
-      alert(`Fiche de paie ajoutée.`);
-  };
-  const handleArchiveIntervention = (id) => setInterventions(prev => prev.map(i => i.id === id ? { ...i, isArchived: true, status: 'Archivée' } : i));
-  const handleDeleteIntervention = (id) => {
-      if(window.confirm("Voulez-vous vraiment supprimer cette intervention ?")) {
-        setInterventions(prev => prev.filter(i => i.id !== id));
-      }
-  };
-
-  const handleUpdateInterventionReport = (id, newReport) => {
-      setInterventions(prev => prev.map(i => i.id === id ? {...i, report: newReport, status: 'Terminée'} : i));
-      setSelectedIntervention(null);
-  };
-
-  if (!currentUser) {
-      return <LoginScreen onLogin={handleLogin} users={users} />;
-  }
-
-  const employeeNavItems = [
-      { id: 'planning', label: 'Planning', icon: <BriefcaseIcon/> },
-      { id: 'leaves', label: 'Congés', icon: <SunIcon/> },
-      { id: 'vault', label: 'Coffre-fort', icon: <LockIcon/> },
-  ];
-  const adminNavItems = [{ id: 'admin', label: 'Administration', icon: <ShieldIcon/> }];
-  const navItems = currentUser.isAdmin ? adminNavItems : employeeNavItems;
-
-  return (
-    <div className="bg-slate-50 min-h-screen font-sans">
-      <header className="bg-white shadow-sm sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                    <UserIcon />
-                    <span className="font-semibold text-slate-800 hidden sm:inline">{currentUser.name}</span>
+            return (
+                <div>
+                    <div className="mb-6 border-b border-slate-200">
+                        <nav className="-mb-px flex space-x-6 overflow-x-auto">
+                            {adminTabs.map(tab => (
+                                <button key={tab.id} onClick={() => setAdminView(tab.id)} className={`whitespace-nowrap flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${adminView === tab.id ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>
+                                   {tab.icon} {tab.label}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+                    {adminView === 'dashboard' && <AdminDashboard interventions={interventions} leaveRequests={leaveRequests} />}
+                    {adminView === 'planning' && <AdminPlanningView interventions={interventions.filter(i => !i.isArchived)} users={users} onAddIntervention={onAddIntervention} onArchive={onArchiveIntervention} onDelete={onDeleteIntervention} />}
+                    {adminView === 'leaves' && <AdminLeaveView leaveRequests={leaveRequests} onUpdateRequestStatus={onUpdateLeaveStatus} />}
+                    {adminView === 'users' && <AdminUserView users={users} currentUser={currentUser} onAddUser={onAddUser} onUpdateUser={onUpdateUser} onDeleteUser={onDeleteUser} />}
+                    {adminView === 'vaults' && <AdminVaultView users={users} allPayslips={payslips} onAddPayslip={onAddPayslip} />}
+                    {adminView === 'archives' && <AdminArchivesView interventions={interventions.filter(i => i.isArchived)} users={users} />}
                 </div>
-                 <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto">
-                    {navItems.map(item => (
-                         <button key={item.id} onClick={() => { setCurrentView(item.id); setSelectedIntervention(null); }} className={`flex items-center gap-2 px-2 sm:px-3 py-2 text-sm font-semibold rounded-md whitespace-nowrap transition-colors ${currentView === item.id ? 'bg-blue-100 text-blue-700' : 'text-slate-600 hover:bg-slate-100'}`}>
-                            {item.icon}
-                            <span className="hidden md:inline">{item.label}</span>
-                         </button>
-                    ))}
-                    <button onClick={handleLogout} className="p-2 text-slate-500 hover:text-red-600 rounded-full hover:bg-slate-100"><LogOutIcon /></button>
-                </nav>
+            );
+        };
+
+
+        // --- Application principale ---
+        function App() {
+          const [currentUser, setCurrentUser] = useState(null);
+          const [currentView, setCurrentView] = useState('planning');
+          const [selectedIntervention, setSelectedIntervention] = useState(null);
+          
+          const [users, setUsers] = useState(initialUsersData);
+          const [interventions, setInterventions] = useState(initialInterventionsData);
+          const [payslips, setPayslips] = useState(initialPayslipsData);
+          const [leaveRequests, setLeaveRequests] = useState(initialLeaveRequestsData);
+          
+          const handleLogin = (user) => {
+              setCurrentUser(user);
+              setCurrentView(user.isAdmin ? 'admin' : 'planning');
+          };
+          const handleLogout = () => {
+            setCurrentUser(null);
+            setSelectedIntervention(null);
+          };
+          
+          const handleAddUser = (newUser) => {
+            if(users[newUser.username]){
+                alert("Cet identifiant est déjà pris.");
+                return;
+            }
+            setUsers(prev => ({...prev, [newUser.username]: newUser}));
+            alert("Employé ajouté avec succès !");
+          };
+          
+          const handleUpdateUser = (updatedUserData) => {
+              const oldUsername = Object.keys(users).find(key => users[key].id === updatedUserData.id);
+              if (!oldUsername) return;
+              const newUsername = updatedUserData.username;
+              
+              setUsers(prev => {
+                  const newUsers = { ...prev };
+                  let userToUpdate = { ...newUsers[oldUsername] };
+                  userToUpdate.name = updatedUserData.name;
+                  userToUpdate.username = newUsername; 
+
+                  if (updatedUserData.newPassword) {
+                      userToUpdate.password = updatedUserData.newPassword;
+                  }
+                  
+                  if (oldUsername !== newUsername) {
+                      if (newUsers[newUsername] && newUsers[newUsername].id !== updatedUserData.id) {
+                          alert("Le nouvel identifiant est déjà utilisé.");
+                          return prev;
+                      }
+                      delete newUsers[oldUsername];
+                      newUsers[newUsername] = userToUpdate;
+                  } else {
+                      newUsers[oldUsername] = userToUpdate;
+                  }
+                  
+                  if(userToUpdate.isAdmin) {
+                      setCurrentUser(userToUpdate);
+                  }
+                  return newUsers;
+              });
+              alert("Compte mis à jour avec succès !");
+          };
+
+          const handleDeleteUser = (userIdToDelete, adminPassword) => {
+              if (adminPassword !== currentUser.password) {
+                  alert("Mot de passe incorrect. Suppression annulée.");
+                  return;
+              }
+              if (window.confirm("Êtes-vous sûr de vouloir supprimer cet employé ? Cette action est irréversible.")) {
+                  const usernameToDelete = Object.keys(users).find(key => users[key].id === userIdToDelete);
+                  if (usernameToDelete) {
+                      const newUsers = { ...users };
+                      delete newUsers[usernameToDelete];
+                      setUsers(newUsers);
+                      alert("Employé supprimé.");
+                  }
+              }
+          };
+          
+          const handleAddIntervention = (intervention) => setInterventions(prev => [...prev, intervention].sort((a,b) => new Date(a.date) - new Date(b.date)));
+          const handleUpdateLeaveStatus = (requestId, status) => setLeaveRequests(prev => prev.map(req => req.id === requestId ? { ...req, status } : req));
+          const handleAddPayslip = ({ userId, payslip }) => {
+              setPayslips(prev => ({ ...prev, [userId]: [...(prev[userId] || []), payslip] }));
+              alert(`Fiche de paie ajoutée.`);
+          };
+          const handleArchiveIntervention = (id) => setInterventions(prev => prev.map(i => i.id === id ? { ...i, isArchived: true, status: 'Archivée' } : i));
+          const handleDeleteIntervention = (id) => {
+              if(window.confirm("Voulez-vous vraiment supprimer cette intervention ?")) {
+                setInterventions(prev => prev.filter(i => i.id !== id));
+              }
+          };
+
+          const handleUpdateInterventionReport = (id, newReport) => {
+              setInterventions(prev => prev.map(i => i.id === id ? {...i, report: newReport, status: 'Terminée'} : i));
+              setSelectedIntervention(null);
+          };
+
+          const handleAddLeaveRequest = (newRequestData) => {
+              const newRequest = {
+                  ...newRequestData,
+                  id: `LR-${Date.now()}`,
+                  userId: currentUser.id,
+                  status: 'En attente'
+              };
+              setLeaveRequests(prev => [...prev, newRequest]);
+              alert("Votre demande de congé a été envoyée.");
+          };
+
+
+          if (!currentUser) {
+              return <LoginScreen onLogin={handleLogin} users={users} />;
+          }
+
+          const employeeNavItems = [
+              { id: 'planning', label: 'Planning', icon: <BriefcaseIcon/> },
+              { id: 'leaves', label: 'Congés', icon: <SunIcon/> },
+              { id: 'vault', label: 'Coffre-fort', icon: <LockIcon/> },
+          ];
+          const adminNavItems = [{ id: 'admin', label: 'Administration', icon: <ShieldIcon/> }];
+          const navItems = currentUser.isAdmin ? adminNavItems : employeeNavItems;
+
+          return (
+            <div className="bg-slate-50 min-h-screen font-sans">
+              <header className="bg-white shadow-sm sticky top-0 z-30">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-3">
+                            <UserIcon />
+                            <span className="font-semibold text-slate-800 hidden sm:inline">{currentUser.name}</span>
+                        </div>
+                         <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto">
+                            {navItems.map(item => (
+                                 <button key={item.id} onClick={() => { setCurrentView(item.id); setSelectedIntervention(null); }} className={`flex items-center gap-2 px-2 sm:px-3 py-2 text-sm font-semibold rounded-md whitespace-nowrap transition-colors ${currentView === item.id ? 'bg-blue-100 text-blue-700' : 'text-slate-600 hover:bg-slate-100'}`}>
+                                    {item.icon}
+                                    <span className="hidden md:inline">{item.label}</span>
+                                 </button>
+                            ))}
+                            <button onClick={handleLogout} className="p-2 text-slate-500 hover:text-red-600 rounded-full hover:bg-slate-100"><LogOutIcon /></button>
+                        </nav>
+                    </div>
+                </div>
+              </header>
+              
+              <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {currentUser.isAdmin ? (
+                    <AdminMasterView 
+                        users={users} 
+                        interventions={interventions} 
+                        leaveRequests={leaveRequests} 
+                        payslips={payslips}
+                        currentUser={currentUser}
+                        onAddIntervention={handleAddIntervention}
+                        onUpdateLeaveStatus={handleUpdateLeaveStatus}
+                        onAddUser={handleAddUser}
+                        onUpdateUser={handleUpdateUser}
+                        onDeleteUser={handleDeleteUser}
+                        onAddPayslip={handleAddPayslip}
+                        onArchiveIntervention={handleArchiveIntervention}
+                        onDeleteIntervention={handleDeleteIntervention}
+                    />
+                ) : (
+                    <>
+                      {selectedIntervention ? (
+                         <EmployeeInterventionDetailView 
+                            intervention={selectedIntervention}
+                            onBack={() => setSelectedIntervention(null)}
+                            onUpdateReport={handleUpdateInterventionReport}
+                         />
+                      ) : (
+                        <>
+                          {currentView === 'planning' && <EmployeePlanningView interventions={interventions.filter(i => i.userId === currentUser.id && !i.isArchived)} onSelectIntervention={setSelectedIntervention} />}
+                          {currentView === 'leaves' && <EmployeeLeaveView leaveRequests={leaveRequests.filter(r => r.userId === currentUser.id)} onSubmitRequest={handleAddLeaveRequest} userName={currentUser.name} />}
+                          {currentView === 'vault' && <CoffreNumeriqueView payslips={payslips[currentUser.id] || []} />}
+                        </>
+                      )}
+                    </>
+                )}
+              </main>
             </div>
-        </div>
-      </header>
-      
-      <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        {currentUser.isAdmin ? (
-            <AdminMasterView 
-                users={users} 
-                interventions={interventions} 
-                leaveRequests={leaveRequests} 
-                payslips={payslips}
-                currentUser={currentUser}
-                onAddIntervention={handleAddIntervention}
-                onUpdateLeaveStatus={handleUpdateLeaveStatus}
-                onAddUser={handleAddUser}
-                onUpdateUser={handleUpdateUser}
-                onDeleteUser={handleDeleteUser}
-                onAddPayslip={handleAddPayslip}
-                onArchiveIntervention={handleArchiveIntervention}
-                onDeleteIntervention={handleDeleteIntervention}
-            />
-        ) : (
-            <>
-              {selectedIntervention ? (
-                 <EmployeeInterventionDetailView 
-                    intervention={selectedIntervention}
-                    onBack={() => setSelectedIntervention(null)}
-                    onUpdateReport={handleUpdateInterventionReport}
-                 />
-              ) : (
-                <>
-                  {currentView === 'planning' && <EmployeePlanningView interventions={interventions.filter(i => i.userId === currentUser.id && !i.isArchived)} onSelectIntervention={setSelectedIntervention} />}
-                  {currentView === 'leaves' && <EmployeeLeaveView leaveRequests={leaveRequests.filter(r => r.userId === currentUser.id)} />}
-                  {currentView === 'vault' && <CoffreNumeriqueView payslips={payslips[currentUser.id] || []} />}
-                </>
-              )}
-            </>
-        )}
-      </main>
-    </div>
-  );
-}
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+    </script>
+</body>
+</html>
