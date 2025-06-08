@@ -65,23 +65,23 @@ const LoginScreen = ({ onLogin, users }) => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <div className="flex items-center justify-center min-h-screen bg-slate-50">
+            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg">
                 <div className="text-center">
-                    <h1 className="text-3xl font-bold text-gray-900">Entreprise SRP</h1>
-                    <p className="mt-2 text-gray-600">Connectez-vous à votre espace</p>
+                    <h1 className="text-4xl font-bold text-slate-800">Entreprise SRP</h1>
+                    <p className="mt-2 text-slate-500">Connectez-vous à votre espace employé</p>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="text-sm font-bold text-gray-600 block">Identifiant ou Nom</label>
-                        <input type="text" value={username} onChange={e => setUsername(e.target.value)} className="w-full p-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <label className="text-sm font-bold text-slate-600 block mb-2">Identifiant ou Nom</label>
+                        <input type="text" value={username} onChange={e => setUsername(e.target.value)} className="w-full px-4 py-3 text-slate-900 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
                     </div>
                     <div>
-                        <label className="text-sm font-bold text-gray-600 block">Mot de passe</label>
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full p-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <label className="text-sm font-bold text-slate-600 block mb-2">Mot de passe</label>
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-4 py-3 text-slate-900 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
                     </div>
                     {error && <p className="text-sm text-red-500 text-center">{error}</p>}
-                    <button type="submit" className="w-full py-3 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Connexion</button>
+                    <button type="submit" className="w-full py-3 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105">Connexion</button>
                 </form>
             </div>
         </div>
@@ -90,7 +90,7 @@ const LoginScreen = ({ onLogin, users }) => {
 
 const GenericStatusBadge = ({ status, colorMap }) => {
     const statusClass = colorMap[status] || "bg-gray-200 text-gray-800";
-    return <span className={`px-2 py-1 text-xs font-bold rounded-full ${statusClass}`}>{status}</span>;
+    return <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${statusClass}`}>{status}</span>;
 };
 
 // --- Vues Employé ---
@@ -163,44 +163,44 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }
             <button onClick={onBack} className="flex items-center gap-2 text-blue-600 font-semibold mb-6 hover:underline"><ChevronLeftIcon /> Retour au planning</button>
             <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
                 <div>
-                    <h2 className="text-2xl font-bold">{intervention.client}</h2>
-                    <p className="text-gray-600">{intervention.service}</p>
+                    <h2 className="text-2xl font-bold text-slate-800">{intervention.client}</h2>
+                    <p className="text-slate-600">{intervention.service}</p>
                 </div>
                 
                 <div className="border-t pt-4">
-                    <h3 className="text-lg font-semibold mb-2">Pointage</h3>
+                    <h3 className="text-lg font-semibold mb-2 text-slate-700">Pointage</h3>
                     <div className="grid grid-cols-2 gap-4">
-                        <button onClick={() => handleTimeAction('arrivalTime')} className="p-3 bg-green-100 text-green-800 rounded-lg disabled:opacity-50" disabled={report.arrivalTime}>Arrivée sur site</button>
-                        <button onClick={() => handleTimeAction('departureTime')} className="p-3 bg-red-100 text-red-800 rounded-lg disabled:opacity-50" disabled={!report.arrivalTime || report.departureTime}>Départ du site</button>
+                        <button onClick={() => handleTimeAction('arrivalTime')} className="p-3 bg-green-100 text-green-800 rounded-lg disabled:opacity-50 font-medium" disabled={report.arrivalTime}>Arrivée sur site</button>
+                        <button onClick={() => handleTimeAction('departureTime')} className="p-3 bg-red-100 text-red-800 rounded-lg disabled:opacity-50 font-medium" disabled={!report.arrivalTime || report.departureTime}>Départ du site</button>
                     </div>
-                    <div className="text-sm mt-2">
-                        <p>Heure d'arrivée: {formatTime(report.arrivalTime)}</p>
-                        <p>Heure de départ: {formatTime(report.departureTime)}</p>
+                    <div className="text-sm mt-2 text-slate-600">
+                        <p>Heure d'arrivée: <span className="font-medium text-slate-800">{formatTime(report.arrivalTime)}</span></p>
+                        <p>Heure de départ: <span className="font-medium text-slate-800">{formatTime(report.departureTime)}</span></p>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mt-2">Temps de trajet (ex: 30min)</label>
-                        <input type="text" value={report.travelTime} onChange={e => handleReportChange('travelTime', e.target.value)} className="w-full p-2 border rounded mt-1"/>
+                        <label className="block text-sm font-medium text-slate-700 mt-2">Temps de trajet (ex: 30min)</label>
+                        <input type="text" value={report.travelTime} onChange={e => handleReportChange('travelTime', e.target.value)} className="w-full p-2 border border-slate-300 rounded mt-1"/>
                     </div>
                 </div>
 
                 <div className="border-t pt-4">
-                     <h3 className="text-lg font-semibold mb-2">Rapport de chantier</h3>
-                    <textarea value={report.notes} onChange={e => handleReportChange('notes', e.target.value)} placeholder="Détails de l'intervention..." rows="4" className="w-full p-2 border rounded"></textarea>
+                     <h3 className="text-lg font-semibold mb-2 text-slate-700">Rapport de chantier</h3>
+                    <textarea value={report.notes} onChange={e => handleReportChange('notes', e.target.value)} placeholder="Détails de l'intervention..." rows="4" className="w-full p-2 border border-slate-300 rounded"></textarea>
                     
-                    <h4 className="font-semibold mt-4 mb-2">Photos</h4>
+                    <h4 className="font-semibold mt-4 mb-2 text-slate-700">Photos</h4>
                     <div className="grid grid-cols-3 gap-2 mb-2">
-                        {report.images.map((img, idx) => <img key={idx} src={img} className="w-full h-24 object-cover rounded"/>)}
+                        {report.images.map((img, idx) => <img key={idx} src={img} className="w-full h-24 object-cover rounded-md shadow"/>)}
                     </div>
-                    <input type="file" multiple accept="image/*" onChange={handleImageUpload} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                    <input type="file" multiple accept="image/*" onChange={handleImageUpload} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
                 </div>
 
                 <div className="border-t pt-4">
-                     <h3 className="text-lg font-semibold mb-2">Signature du client</h3>
-                     <canvas ref={signatureCanvasRef} className="border border-gray-400 rounded-md w-full h-32 bg-gray-50"></canvas>
-                     <button onClick={() => signatureCanvasRef.current.getContext('2d').clearRect(0, 0, signatureCanvasRef.current.width, signatureCanvasRef.current.height)} className="text-xs text-gray-600 hover:underline mt-1">Effacer</button>
+                     <h3 className="text-lg font-semibold mb-2 text-slate-700">Signature du client</h3>
+                     <canvas ref={signatureCanvasRef} className="border border-slate-400 rounded-md w-full h-32 bg-slate-50"></canvas>
+                     <button onClick={() => signatureCanvasRef.current.getContext('2d').clearRect(0, 0, signatureCanvasRef.current.width, signatureCanvasRef.current.height)} className="text-xs text-slate-600 hover:underline mt-1">Effacer</button>
                 </div>
                 
-                <button onClick={handleSave} className="w-full py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Sauvegarder et Clôturer le rapport</button>
+                <button onClick={handleSave} className="w-full py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">Sauvegarder et Clôturer le rapport</button>
             </div>
         </div>
     );
@@ -208,19 +208,23 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }
 
 const EmployeePlanningView = ({ interventions, onSelectIntervention }) => (
     <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Votre Planning</h2>
+        <h2 className="text-3xl font-bold text-slate-800 mb-6">Votre Planning</h2>
         {interventions.length > 0 ? interventions.map(int => (
-            <div key={int.id} onClick={() => onSelectIntervention(int)} className="bg-white p-4 rounded-lg shadow-md mb-3 border-l-4 border-blue-500 cursor-pointer hover:bg-gray-50">
+            <div key={int.id} onClick={() => onSelectIntervention(int)} className="bg-white p-4 rounded-lg shadow-md mb-3 border-l-4 border-blue-500 cursor-pointer hover:bg-slate-50 transition">
                 <div className="flex justify-between items-center">
                     <div>
-                        <p className="font-bold">{int.client}</p>
-                        <p className="text-sm text-gray-600">{int.service}</p>
+                        <p className="font-semibold text-slate-800">{int.client}</p>
+                        <p className="text-sm text-slate-600">{int.service}</p>
                     </div>
                     <GenericStatusBadge status={int.status} colorMap={{ "À venir": "bg-blue-100 text-blue-800", "Terminée": "bg-green-100 text-green-800" }}/>
                 </div>
-                <p className="text-sm text-gray-500 mt-2">{int.date} à {int.time}</p>
+                <p className="text-sm text-slate-500 mt-2">{int.date} à {int.time}</p>
             </div>
-        )) : <p>Aucune intervention planifiée.</p>}
+        )) : 
+        <div className="bg-white p-6 rounded-lg shadow-md text-center text-slate-500">
+            <p>Aucune intervention planifiée pour le moment.</p>
+        </div>
+        }
     </div>
 );
 
@@ -231,10 +235,10 @@ const AdminDashboard = ({ interventions, leaveRequests }) => {
     const upcomingInterventions = interventions.filter(i => !i.isArchived).length;
     return (
         <div>
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Tableau de Bord</h3>
+            <h3 className="text-xl font-bold text-slate-800 mb-4">Tableau de Bord</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow"><p className="text-3xl font-bold">{upcomingInterventions}</p><p className="text-gray-600">Interventions planifiées</p></div>
-                <div className="bg-white p-6 rounded-lg shadow"><p className="text-3xl font-bold">{pendingLeaves}</p><p className="text-gray-600">Demandes de congés en attente</p></div>
+                <div className="bg-white p-6 rounded-lg shadow"><p className="text-3xl font-bold">{upcomingInterventions}</p><p className="text-slate-600">Interventions planifiées</p></div>
+                <div className="bg-white p-6 rounded-lg shadow"><p className="text-3xl font-bold">{pendingLeaves}</p><p className="text-slate-600">Demandes de congés en attente</p></div>
             </div>
         </div>
     )
@@ -255,19 +259,19 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
     return (
         <div>
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-gray-800">Gestion du Planning</h3>
+                <h3 className="text-xl font-bold text-slate-800">Gestion du Planning</h3>
                 <button onClick={() => setShowForm(!showForm)} className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 flex items-center gap-2"><PlusIcon/>{showForm ? 'Annuler' : 'Nouvelle Intervention'}</button>
             </div>
             {showForm && (
                 <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow mb-6 space-y-4">
-                    <input name="client" value={formValues.client} onChange={handleInputChange} placeholder="Nom du client" required className="w-full p-2 border rounded"/>
-                    <input name="address" value={formValues.address} onChange={handleInputChange} placeholder="Adresse" required className="w-full p-2 border rounded"/>
-                    <input name="service" value={formValues.service} onChange={handleInputChange} placeholder="Service" required className="w-full p-2 border rounded"/>
+                    <input name="client" value={formValues.client} onChange={handleInputChange} placeholder="Nom du client" required className="w-full p-2 border border-slate-300 rounded"/>
+                    <input name="address" value={formValues.address} onChange={handleInputChange} placeholder="Adresse" required className="w-full p-2 border border-slate-300 rounded"/>
+                    <input name="service" value={formValues.service} onChange={handleInputChange} placeholder="Service" required className="w-full p-2 border border-slate-300 rounded"/>
                     <div className="grid grid-cols-2 gap-4">
-                        <input name="date" type="date" value={formValues.date} onChange={handleInputChange} required className="w-full p-2 border rounded"/>
-                        <input name="time" type="time" value={formValues.time} onChange={handleInputChange} required className="w-full p-2 border rounded"/>
+                        <input name="date" type="date" value={formValues.date} onChange={handleInputChange} required className="w-full p-2 border border-slate-300 rounded"/>
+                        <input name="time" type="time" value={formValues.time} onChange={handleInputChange} required className="w-full p-2 border border-slate-300 rounded"/>
                     </div>
-                    <select name="userId" value={formValues.userId} onChange={handleInputChange} required className="w-full p-2 border rounded">
+                    <select name="userId" value={formValues.userId} onChange={handleInputChange} required className="w-full p-2 border border-slate-300 rounded">
                         <option value="">Assigner à...</option>
                         {Object.values(users).filter(u => !u.isAdmin).map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
                     </select>
@@ -275,16 +279,16 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
                 </form>
             )}
             <div className="bg-white p-6 rounded-lg shadow">
-                 <ul className="divide-y divide-gray-200">
+                 <ul className="divide-y divide-slate-200">
                     {interventions.map(int => (<li key={int.id} className="py-3 flex justify-between items-center">
                         <div>
-                            <p className="font-semibold">{int.client} - {int.service}</p>
-                            <p className="text-sm text-gray-600">Assigné à: {(Object.values(users).find(u => u.id === int.userId) || { name: 'Inconnu' }).name}</p>
-                            <p className="text-sm text-gray-500">{int.date} à {int.time}</p>
+                            <p className="font-semibold text-slate-800">{int.client} - {int.service}</p>
+                            <p className="text-sm text-slate-600">Assigné à: {(Object.values(users).find(u => u.id === int.userId) || { name: 'Inconnu' }).name}</p>
+                            <p className="text-sm text-slate-500">{int.date} à {int.time}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                             <button onClick={() => onArchive(int.id)} className="p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
-                             <button onClick={() => onDelete(int.id)} className="p-2 text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-full" title="Supprimer"><TrashIcon/></button>
+                             <button onClick={() => onArchive(int.id)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
+                             <button onClick={() => onDelete(int.id)} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full" title="Supprimer"><TrashIcon/></button>
                         </div>
                     </li>))}
                 </ul>
@@ -295,16 +299,16 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
 
 const AdminArchivesView = ({ interventions, users }) => (
     <div>
-        <h3 className="text-xl font-bold text-gray-800 mb-4">Interventions Archivées</h3>
+        <h3 className="text-xl font-bold text-slate-800 mb-4">Interventions Archivées</h3>
         <div className="bg-white p-6 rounded-lg shadow">
-             <ul className="divide-y divide-gray-200">
+             <ul className="divide-y divide-slate-200">
                 {interventions.length > 0 ? interventions.map(int => (<li key={int.id} className="py-3 flex justify-between items-center">
                     <div>
-                        <p className="font-semibold">{int.client} - {int.service}</p>
-                        <p className="text-sm text-gray-600">Terminée par: {(Object.values(users).find(u => u.id === int.userId) || { name: 'Inconnu' }).name} le {int.date}</p>
+                        <p className="font-semibold text-slate-800">{int.client} - {int.service}</p>
+                        <p className="text-sm text-slate-600">Terminée par: {(Object.values(users).find(u => u.id === int.userId) || { name: 'Inconnu' }).name} le {int.date}</p>
                     </div>
-                    <button onClick={() => alert("Simulation d'export des données : \n" + JSON.stringify(int.report, null, 2))} className="p-2 text-gray-600 hover:text-green-600 hover:bg-gray-100 rounded-full" title="Exporter les données"><DownloadIcon/></button>
-                </li>)) : <p className="text-gray-500">Aucune intervention archivée.</p>}
+                    <button onClick={() => alert("Simulation d'export des données : \n" + JSON.stringify(int.report, null, 2))} className="p-2 text-slate-600 hover:text-green-600 hover:bg-slate-100 rounded-full" title="Exporter les données"><DownloadIcon/></button>
+                </li>)) : <p className="text-slate-500">Aucune intervention archivée.</p>}
             </ul>
         </div>
     </div>
@@ -314,14 +318,14 @@ const AdminLeaveView = ({ leaveRequests, onUpdateRequestStatus }) => {
     const statusColorMap = { "Approuvé": "bg-green-100 text-green-800", "En attente": "bg-yellow-100 text-yellow-800", "Rejeté": "bg-red-100 text-red-800" };
     return (
         <div>
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Gestion des Demandes de Congés</h3>
+            <h3 className="text-xl font-bold text-slate-800 mb-4">Gestion des Demandes de Congés</h3>
             <div className="bg-white p-6 rounded-lg shadow">
-                <ul className="divide-y divide-gray-200">
+                <ul className="divide-y divide-slate-200">
                     {leaveRequests.map(req => (
                         <li key={req.id} className="py-4">
                             <div>
                                 <p className="font-semibold">{req.userName} - <span className="font-normal">{req.reason}</span></p>
-                                <p className="text-sm text-gray-600">Du {req.startDate} au {req.endDate}</p>
+                                <p className="text-sm text-slate-600">Du {req.startDate} au {req.endDate}</p>
                             </div>
                             <div className="flex items-center gap-4 mt-2">
                                 <GenericStatusBadge status={req.status} colorMap={statusColorMap}/>
@@ -338,6 +342,57 @@ const AdminLeaveView = ({ leaveRequests, onUpdateRequestStatus }) => {
             </div>
         </div>
     )
+};
+
+const EditUserModal = ({ user, onSave, onCancel }) => {
+    const [formData, setFormData] = useState({ ...user, newPassword: '', adminPassword: '' });
+
+    useEffect(() => {
+        setFormData({ ...user, newPassword: '', adminPassword: '' });
+    }, [user]);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    
+    const handleSave = (e) => {
+        e.preventDefault();
+        onSave(formData, formData.adminPassword);
+    };
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold">Modifier le compte</h3>
+                    <button onClick={onCancel} className="p-1"><XIcon /></button>
+                </div>
+                <form onSubmit={handleSave} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Nom complet</label>
+                        <input name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded mt-1"/>
+                    </div>
+                     <div>
+                        <label className="block text-sm font-medium text-gray-700">Identifiant de connexion</label>
+                        <input name="username" value={formData.username} onChange={handleChange} className="w-full p-2 border rounded mt-1"/>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Nouveau mot de passe (laisser vide pour ne pas changer)</label>
+                        <input name="newPassword" type="password" value={formData.newPassword} onChange={handleChange} placeholder="••••••••" className="w-full p-2 border rounded mt-1"/>
+                    </div>
+                    <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
+                        <p className="font-bold">Vérification requise</p>
+                        <p>Pour enregistrer les modifications, veuillez entrer votre mot de passe administrateur.</p>
+                         <input name="adminPassword" type="password" value={formData.adminPassword} onChange={handleChange} placeholder="Votre mot de passe actuel" required className="w-full p-2 border rounded mt-2"/>
+                    </div>
+                    <div className="flex justify-end gap-4 mt-6">
+                        <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-200 rounded-lg">Annuler</button>
+                        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 };
 
 const AdminUserView = ({ users, currentUser, onAddUser, onUpdateUser, onDeleteUser }) => {
@@ -385,18 +440,18 @@ const AdminUserView = ({ users, currentUser, onAddUser, onUpdateUser, onDeleteUs
             {editingUser && <EditUserModal user={editingUser} onSave={handleUpdateSubmit} onCancel={() => setEditingUser(null)} />}
 
             <div className="bg-white p-6 rounded-lg shadow mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Mon Compte Administrateur</h3>
+                <h3 className="text-xl font-bold text-slate-800 mb-2">Mon Compte Administrateur</h3>
                 <div className="flex justify-between items-center">
                     <div>
                         <p className="font-semibold">{adminUser.name}</p>
-                        <p className="text-sm text-gray-500">{Object.keys(users).find(key => users[key].id === adminUser.id)}</p>
+                        <p className="text-sm text-slate-500">{Object.keys(users).find(key => users[key].id === adminUser.id)}</p>
                     </div>
-                    <button onClick={() => setEditingUser(adminUser)} className="p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-100 rounded-full"><EditIcon/></button>
+                    <button onClick={() => setEditingUser(adminUser)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full"><EditIcon/></button>
                 </div>
             </div>
 
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-gray-800">Employés</h3>
+                <h3 className="text-xl font-bold text-slate-800">Employés</h3>
                 <button onClick={() => setShowAddForm(!showAddForm)} className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 flex items-center gap-2"><PlusIcon/>{showAddForm ? 'Annuler' : 'Nouvel Employé'}</button>
             </div>
 
@@ -415,16 +470,16 @@ const AdminUserView = ({ users, currentUser, onAddUser, onUpdateUser, onDeleteUs
             )}
 
             <div className="bg-white p-6 rounded-lg shadow">
-                 <ul className="divide-y divide-gray-200">
+                 <ul className="divide-y divide-slate-200">
                     {Object.values(users).filter(u => !u.isAdmin).map(u => (
                         <li key={u.id} className="py-3 flex justify-between items-center">
                             <div>
                                 <p className="font-semibold">{u.name}</p>
-                                <p className="text-sm text-gray-500">{Object.keys(users).find(key => users[key].id === u.id)}</p>
+                                <p className="text-sm text-slate-500">{Object.keys(users).find(key => users[key].id === u.id)}</p>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button onClick={() => setEditingUser(u)} className="p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-100 rounded-full"><EditIcon/></button>
-                                <button onClick={() => handleDeleteWithVerification(u.id)} className="p-2 text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-full"><TrashIcon/></button>
+                                <button onClick={() => setEditingUser(u)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full"><EditIcon/></button>
+                                <button onClick={() => handleDeleteWithVerification(u.id)} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full"><TrashIcon/></button>
                             </div>
                         </li>
                     ))}
@@ -442,7 +497,7 @@ const AdminVaultView = ({ users, allPayslips, onAddPayslip }) => {
     const [formDate, setFormDate] = useState('');
     const handleAddSubmit = (e) => { e.preventDefault(); if(!formUserId || !formMonth || !formDate) { alert("Veuillez remplir tous les champs."); return; } onAddPayslip({userId: formUserId, payslip: { id: `FP-${Date.now()}`, month: formMonth, date: formDate, url: "#"}}); setShowAddForm(false); setFormUserId(''); setFormMonth(''); setFormDate(''); };
     const employees = Object.values(users).filter(u => !u.isAdmin);
-    return (<div><div className="flex justify-between items-center mb-6"><h3 className="text-xl font-bold text-gray-800">Gestion des Coffres-forts</h3><button onClick={() => setShowAddForm(!showAddForm)} className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">{showAddForm ? 'Annuler' : 'Ajouter Fiche de Paie'}</button></div>{showAddForm && (<div className="bg-white p-6 rounded-lg shadow-md mb-6"><form onSubmit={handleAddSubmit} className="space-y-4"><h3 className="text-xl font-semibold text-gray-800">Ajouter une Fiche de Paie</h3><div><label>Employé</label><select value={formUserId} onChange={e => setFormUserId(e.target.value)} required className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div><div className="grid md:grid-cols-2 gap-4"><div><label>Mois (ex: Juin 2025)</label><input type="text" value={formMonth} onChange={e => setFormMonth(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div><div><label>Date de réception</label><input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div></div><div><label>Fichier PDF</label><input type="file" className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/></div><button type="submit" className="w-full py-2 font-semibold text-white bg-blue-600 rounded-lg">Valider</button></form></div>)}{<div className="bg-white p-6 rounded-lg shadow-md"> <h3 className="text-xl font-semibold text-gray-800 mb-4">Consulter un coffre-fort</h3><div><label>Sélectionner un employé</label><select value={selectedUserId} onChange={e => setSelectedUserId(e.target.value)} className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div>{selectedUserId && (<div className="mt-6"><h4 className="font-semibold">Documents pour {(Object.values(users).find(u=>u.id === selectedUserId) || {name: 'Inconnu'}).name}</h4><ul className="divide-y mt-2">{(allPayslips[selectedUserId] || []).length > 0 ? (allPayslips[selectedUserId] || []).map(doc => <li key={doc.id} className="py-3 flex justify-between items-center"><div><p>{doc.month}</p><p className="text-sm text-gray-500">{doc.date}</p></div><a href={doc.url} download className="text-blue-500 hover:underline text-sm">Télécharger</a></li>) : <p className="text-gray-500 mt-2">Aucun document.</p>}</ul></div>)}</div>}</div>);
+    return (<div><div className="flex justify-between items-center mb-6"><h3 className="text-xl font-bold text-slate-800">Gestion des Coffres-forts</h3><button onClick={() => setShowAddForm(!showAddForm)} className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">{showAddForm ? 'Annuler' : 'Ajouter Fiche de Paie'}</button></div>{showAddForm && (<div className="bg-white p-6 rounded-lg shadow-md mb-6"><form onSubmit={handleAddSubmit} className="space-y-4"><h3 className="text-xl font-semibold text-slate-800">Ajouter une Fiche de Paie</h3><div><label>Employé</label><select value={formUserId} onChange={e => setFormUserId(e.target.value)} required className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div><div className="grid md:grid-cols-2 gap-4"><div><label>Mois (ex: Juin 2025)</label><input type="text" value={formMonth} onChange={e => setFormMonth(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div><div><label>Date de réception</label><input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div></div><div><label>Fichier PDF</label><input type="file" className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/></div><button type="submit" className="w-full py-2 font-semibold text-white bg-blue-600 rounded-lg">Valider</button></form></div>)}{<div className="bg-white p-6 rounded-lg shadow-md"> <h3 className="text-xl font-semibold text-slate-800 mb-4">Consulter un coffre-fort</h3><div><label>Sélectionner un employé</label><select value={selectedUserId} onChange={e => setSelectedUserId(e.target.value)} className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div>{selectedUserId && (<div className="mt-6"><h4 className="font-semibold">Documents pour {(Object.values(users).find(u=>u.id === selectedUserId) || {name: 'Inconnu'}).name}</h4><ul className="divide-y mt-2">{(allPayslips[selectedUserId] || []).length > 0 ? (allPayslips[selectedUserId] || []).map(doc => <li key={doc.id} className="py-3 flex justify-between items-center"><div><p>{doc.month}</p><p className="text-sm text-slate-500">{doc.date}</p></div><a href={doc.url} download className="text-blue-500 hover:underline text-sm">Télécharger</a></li>) : <p className="text-slate-500 mt-2">Aucun document.</p>}</ul></div>)}</div>}</div>);
 };
 
 const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention }) => {
@@ -458,11 +513,11 @@ const AdminMasterView = ({ users, interventions, leaveRequests, payslips, curren
 
     return (
         <div>
-            <div className="mb-6 border-b border-gray-200">
+            <div className="mb-6 border-b border-slate-200">
                 <nav className="-mb-px flex space-x-6 overflow-x-auto">
                     {adminTabs.map(tab => (
-                        <button key={tab.id} onClick={() => setAdminView(tab.id)} className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${adminView === tab.id ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
-                            {tab.label}
+                        <button key={tab.id} onClick={() => setAdminView(tab.id)} className={`whitespace-nowrap flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${adminView === tab.id ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>
+                           {tab.icon} {tab.label}
                         </button>
                     ))}
                 </nav>
@@ -498,7 +553,6 @@ export default function App() {
     setSelectedIntervention(null);
   };
   
-  // --- Admin Actions ---
   const handleAddUser = (newUser) => {
     if(users[newUser.username]){
         alert("Cet identifiant est déjà pris.");
@@ -517,6 +571,7 @@ export default function App() {
           const newUsers = { ...prev };
           let userToUpdate = { ...newUsers[oldUsername] };
           userToUpdate.name = updatedUserData.name;
+          userToUpdate.username = newUsername; // allow username change
 
           if (updatedUserData.newPassword) {
               userToUpdate.password = updatedUserData.newPassword;
@@ -570,7 +625,6 @@ export default function App() {
       }
   };
 
-  // --- Employee Actions ---
   const handleUpdateInterventionReport = (id, newReport) => {
       setInterventions(prev => prev.map(i => i.id === id ? {...i, report: newReport, status: 'Terminée'} : i));
       setSelectedIntervention(null);
@@ -589,22 +643,22 @@ export default function App() {
   const navItems = currentUser.isAdmin ? adminNavItems : employeeNavItems;
 
   return (
-    <div className="bg-gray-100 min-h-screen font-sans">
-      <header className="bg-white shadow-sm sticky top-0 z-20">
+    <div className="bg-slate-50 min-h-screen font-sans">
+      <header className="bg-white shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <UserIcon />
-                    <span className="font-semibold text-gray-800 hidden sm:inline">{currentUser.name}</span>
+                    <span className="font-semibold text-slate-800 hidden sm:inline">{currentUser.name}</span>
                 </div>
                  <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto">
                     {navItems.map(item => (
-                         <button key={item.id} onClick={() => { setCurrentView(item.id); setSelectedIntervention(null); }} className={`flex items-center gap-2 px-2 sm:px-3 py-2 text-sm font-semibold rounded-md whitespace-nowrap transition-colors ${currentView === item.id ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100'}`}>
+                         <button key={item.id} onClick={() => { setCurrentView(item.id); setSelectedIntervention(null); }} className={`flex items-center gap-2 px-2 sm:px-3 py-2 text-sm font-semibold rounded-md whitespace-nowrap transition-colors ${currentView === item.id ? 'bg-blue-100 text-blue-700' : 'text-slate-600 hover:bg-slate-100'}`}>
                             {item.icon}
                             <span className="hidden md:inline">{item.label}</span>
                          </button>
                     ))}
-                    <button onClick={handleLogout} className="p-2 text-gray-500 hover:text-red-600 rounded-full hover:bg-gray-100"><LogOutIcon /></button>
+                    <button onClick={handleLogout} className="p-2 text-slate-500 hover:text-red-600 rounded-full hover:bg-slate-100"><LogOutIcon /></button>
                 </nav>
             </div>
         </div>
