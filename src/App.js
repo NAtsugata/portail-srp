@@ -571,7 +571,7 @@ export default function App() {
           const newUsers = { ...prev };
           let userToUpdate = { ...newUsers[oldUsername] };
           userToUpdate.name = updatedUserData.name;
-          userToUpdate.username = newUsername; // allow username change
+          userToUpdate.username = newUsername; 
 
           if (updatedUserData.newPassword) {
               userToUpdate.password = updatedUserData.newPassword;
