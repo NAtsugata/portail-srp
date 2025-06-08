@@ -229,6 +229,33 @@ const EmployeePlanningView = ({ interventions, onSelectIntervention }) => (
 );
 
 
+const EmployeeLeaveView = ({ leaveRequests }) => {
+    const statusColorMap = { "Approuvé": "bg-green-100 text-green-800", "En attente": "bg-yellow-100 text-yellow-800", "Rejeté": "bg-red-100 text-red-800" };
+    return (
+        <div>
+            <h2 className="text-3xl font-bold text-slate-800 mb-6">Vos Demandes de Congés</h2>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+                 <ul className="divide-y divide-slate-200">
+                    {leaveRequests.map(req => (<li key={req.id} className="py-4 flex justify-between items-center"><div><p className="font-semibold text-slate-800">{req.reason}</p><p className="text-sm text-slate-500">Du {req.startDate} au {req.endDate}</p></div><GenericStatusBadge status={req.status} colorMap={statusColorMap} /></li>))}
+                </ul>
+                <button className="mt-4 w-full py-2 border-2 border-dashed border-slate-300 rounded-lg text-slate-500 hover:bg-slate-100 transition">Faire une nouvelle demande</button>
+            </div>
+        </div>
+    );
+};
+
+const CoffreNumeriqueView = ({ payslips }) => (
+    <div>
+        <h2 className="text-3xl font-bold text-slate-800 mb-6">Votre Coffre-fort</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-slate-800 mb-4">Fiches de paie</h3>
+            <ul className="divide-y divide-slate-200">
+                {payslips.length > 0 ? payslips.map(doc => <li key={doc.id} className="py-4 flex justify-between items-center"><div><p className="font-semibold">{doc.month}</p><p className="text-sm text-slate-500">{doc.date}</p></div><a href={doc.url} download className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition">Télécharger</a></li>) : <p className="text-slate-500">Aucun document.</p>}
+            </ul>
+        </div>
+    </div>
+);
+
 // --- Vues Admin ---
 const AdminDashboard = ({ interventions, leaveRequests }) => {
     const pendingLeaves = leaveRequests.filter(r => r.status === 'En attente').length;
