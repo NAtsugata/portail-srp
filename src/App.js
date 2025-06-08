@@ -605,7 +605,7 @@ const AdminVaultView = ({ users, allPayslips, onAddPayslip }) => {
 
 
         // --- Application principale ---
-        export default function App() {
+        function App() {
           const [currentUser, setCurrentUser] = useState(null);
           const [currentView, setCurrentView] = useState('planning');
           const [selectedIntervention, setSelectedIntervention] = useState(null);
@@ -785,3 +785,5 @@ const AdminVaultView = ({ users, allPayslips, onAddPayslip }) => {
             </div>
           );
         }
+
+export default App;
