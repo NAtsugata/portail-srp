@@ -19,7 +19,7 @@ const DownloadIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" he
 const ChevronLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>;
 const AlertTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>;
 
-// --- NOUVEAU : Modèle de permissions ---
+// --- Modèle de permissions ---
 const ALL_PERMISSIONS = {
     canModifyPlanning: "Modifier le planning et les documents associés",
 };
@@ -316,12 +316,12 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport, 
     );
 };
 
-const EmployeePlanningView = ({ interventions, onSelectIntervention, currentUser, onEditIntervention }) => (
+const EmployeePlanningView = ({ interventions, onSelectIntervention, currentUser }) => (
     <div>
         <h2 className="text-3xl font-bold text-slate-800 mb-6">Votre Planning</h2>
         {interventions.length > 0 ? interventions.map(int => (
-            <div key={int.id} className="bg-white rounded-lg shadow-md mb-3 border-l-4 border-blue-500 overflow-hidden">
-                <div onClick={() => onSelectIntervention(int)} className="p-4 cursor-pointer hover:bg-slate-50 transition">
+            <div key={int.id} onClick={() => onSelectIntervention(int)} className="bg-white rounded-lg shadow-md mb-3 border-l-4 border-blue-500 overflow-hidden cursor-pointer hover:bg-slate-50 transition">
+                <div className="p-4">
                     <div className="flex justify-between items-center">
                         <div>
                             <p className="font-semibold text-slate-800">{int.client}</p>
@@ -333,7 +333,7 @@ const EmployeePlanningView = ({ interventions, onSelectIntervention, currentUser
                 </div>
                 {(currentUser.permissions && currentUser.permissions.canModifyPlanning && int.userId === currentUser.id && !int.isArchived) && (
                      <div className="border-t bg-slate-50 px-4 py-2 text-right">
-                        <button onClick={() => onSelectIntervention(int)} className="text-sm font-semibold text-blue-600 hover:underline">Voir détails et modifier les documents</button>
+                        <span className="text-sm font-semibold text-blue-600">Vous pouvez modifier les documents sur la page de détail.</span>
                     </div>
                 )}
             </div>
@@ -433,7 +433,7 @@ const AdminDashboard = ({ interventions, leaveRequests }) => {
     )
 };
 
-const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive, onDelete, onEdit, onSelectIntervention }) => {
+const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive, onDelete, onEdit }) => {
     const [showForm, setShowForm] = useState(false);
     const [formValues, setFormValues] = useState({ userId: '', client: '', address: '', service: '', date: '', time: '' });
     
@@ -470,15 +470,15 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
             <div className="bg-white p-6 rounded-lg shadow">
                  <ul className="divide-y divide-slate-200">
                     {interventions.map(int => (<li key={int.id} className="py-3 flex justify-between items-center">
-                        <div className="flex-grow cursor-pointer" onClick={() => onSelectIntervention(int)}>
+                        <div className="flex-grow">
                             <p className="font-semibold text-slate-800">{int.client} - {int.service}</p>
                             <p className="text-sm text-slate-600">Assigné à: {(Object.values(users).find(u => u.id === int.userId) || { name: 'Inconnu' }).name}</p>
                             <p className="text-sm text-slate-500">{int.date} à {int.time}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                             <button onClick={(e) => { e.stopPropagation(); onEdit(int); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Modifier les détails et documents"><EditIcon/></button>
-                             <button onClick={(e) => { e.stopPropagation(); onArchive(int.id); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
-                             <button onClick={(e) => { e.stopPropagation(); onDelete(int.id); }} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full" title="Supprimer"><TrashIcon/></button>
+                             <button onClick={() => onEdit(int)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Modifier les détails et documents"><EditIcon/></button>
+                             <button onClick={() => onArchive(int.id)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
+                             <button onClick={() => onDelete(int.id)} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full" title="Supprimer"><TrashIcon/></button>
                         </div>
                     </li>))}
                 </ul>
@@ -818,7 +818,7 @@ const AdminVaultView = ({ users, allPayslips, onAddPayslip, showToast }) => {
     return (<div><div className="flex justify-between items-center mb-6"><h3 className="text-xl font-bold text-slate-800">Gestion des Coffres-forts</h3><button onClick={() => setShowAddForm(!showAddForm)} className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">{showAddForm ? 'Annuler' : 'Ajouter Fiche de Paie'}</button></div>{showAddForm && (<div className="bg-white p-6 rounded-lg shadow-md mb-6"><form onSubmit={handleAddSubmit} className="space-y-4"><h3 className="text-xl font-semibold text-slate-800">Ajouter une Fiche de Paie</h3><div><label>Employé</label><select value={formUserId} onChange={e => setFormUserId(e.target.value)} required className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div><div className="grid md:grid-cols-2 gap-4"><div><label>Mois (ex: Juin 2025)</label><input type="text" value={formMonth} onChange={e => setFormMonth(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div><div><label>Date de réception</label><input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div></div><div><label>Fichier PDF (simulation)</label><input type="file" className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/></div><button type="submit" className="w-full py-2 font-semibold text-white bg-blue-600 rounded-lg">Valider</button></form></div>)}{<div className="bg-white p-6 rounded-lg shadow-md"> <h3 className="text-xl font-semibold text-slate-800 mb-4">Consulter un coffre-fort</h3><div><label>Sélectionner un employé</label><select value={selectedUserId} onChange={e => setSelectedUserId(e.target.value)} className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div>{selectedUserId && (<div className="mt-6"><h4 className="font-semibold">Documents pour {(Object.values(users).find(u=>u.id === selectedUserId) || {name: 'Inconnu'}).name}</h4><ul className="divide-y mt-2">{(allPayslips[selectedUserId] || []).length > 0 ? (allPayslips[selectedUserId] || []).map(doc => <li key={doc.id} className="py-3 flex justify-between items-center"><div><p>{doc.month}</p><p className="text-sm text-slate-500">{doc.date}</p></div><a href={doc.url} download className="text-blue-500 hover:underline text-sm">Télécharger</a></li>) : <p className="text-slate-500 mt-2">Aucun document.</p>}</ul></div>)}</div>}</div>);
 };
 
-const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention, onEditIntervention, onSelectIntervention, showToast }) => {
+const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention, onEditIntervention, showToast }) => {
     const [adminView, setAdminView] = useState('dashboard');
     const adminTabs = [
         { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboardIcon /> },
@@ -841,7 +841,7 @@ const AdminMasterView = ({ users, interventions, leaveRequests, payslips, curren
                 </nav>
             </div>
             {adminView === 'dashboard' && <AdminDashboard interventions={interventions} leaveRequests={leaveRequests} />}
-            {adminView === 'planning' && <AdminPlanningView interventions={interventions.filter(i => !i.isArchived)} users={users} onAddIntervention={onAddIntervention} onArchive={onArchiveIntervention} onDelete={onDeleteIntervention} onEdit={onEditIntervention} onSelectIntervention={onSelectIntervention} />}
+            {adminView === 'planning' && <AdminPlanningView interventions={interventions.filter(i => !i.isArchived)} users={users} onAddIntervention={onAddIntervention} onArchive={onArchiveIntervention} onDelete={onDeleteIntervention} onEdit={onEditIntervention} />}
             {adminView === 'leaves' && <AdminLeaveView leaveRequests={leaveRequests} onUpdateRequestStatus={onUpdateLeaveStatus} />}
             {adminView === 'users' && <AdminUserView users={users} currentUser={currentUser} onAddUser={onAddUser} onUpdateUser={onUpdateUser} onDeleteUser={onDeleteUser} />}
             {adminView === 'vaults' && <AdminVaultView users={users} allPayslips={payslips} onAddPayslip={onAddPayslip} showToast={showToast} />}
@@ -1098,7 +1098,6 @@ function App() {
                 onArchiveIntervention={handleArchiveIntervention}
                 onDeleteIntervention={handleDeleteIntervention}
                 onEditIntervention={setEditingIntervention}
-                onSelectIntervention={setSelectedIntervention}
                 showToast={showToast}
             />
         ) : (
@@ -1113,7 +1112,7 @@ function App() {
                  />
               ) : (
                 <>
-                  {currentView === 'planning' && <EmployeePlanningView interventions={interventions.filter(i => i.userId === currentUser.id && !i.isArchived)} onSelectIntervention={setSelectedIntervention} currentUser={currentUser} onEditIntervention={setEditingIntervention} />}
+                  {currentView === 'planning' && <EmployeePlanningView interventions={interventions.filter(i => i.userId === currentUser.id && !i.isArchived)} onSelectIntervention={setSelectedIntervention} currentUser={currentUser} />}
                   {currentView === 'leaves' && <EmployeeLeaveView leaveRequests={leaveRequests.filter(r => r.userId === currentUser.id)} onSubmitRequest={handleAddLeaveRequest} userName={currentUser.name} showToast={showToast} />}
                   {currentView === 'vault' && <CoffreNumeriqueView payslips={payslips[currentUser.id] || []} />}
                 </>
