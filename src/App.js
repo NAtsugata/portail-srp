@@ -476,7 +476,7 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
                             <p className="text-sm text-slate-500">{int.date} à {int.time}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                             <button onClick={(e) => { e.stopPropagation(); onEdit(int); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Modifier les détails"><EditIcon/></button>
+                             <button onClick={(e) => { e.stopPropagation(); onEdit(int); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Modifier les détails et documents"><EditIcon/></button>
                              <button onClick={(e) => { e.stopPropagation(); onArchive(int.id); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
                              <button onClick={(e) => { e.stopPropagation(); onDelete(int.id); }} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full" title="Supprimer"><TrashIcon/></button>
                         </div>
@@ -489,6 +489,7 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
 
 const EditInterventionModal = ({ intervention, onSave, onCancel, users }) => {
     const [formData, setFormData] = useState(intervention);
+    const [newDocName, setNewDocName] = useState("");
     
     useEffect(() => {
         setFormData(intervention);
@@ -503,10 +504,30 @@ const EditInterventionModal = ({ intervention, onSave, onCancel, users }) => {
         onSave(formData);
     };
 
+    const handleDocumentAdd = () => {
+        if (!newDocName) return;
+        const newDocument = { id: `doc-${Date.now()}`, name: newDocName, url: "#" };
+        setFormData(prev => ({
+            ...prev,
+            documents: [...(prev.documents || []), newDocument]
+        }));
+        setNewDocName("");
+    };
+
+    const handleDocumentDelete = (docId) => {
+        setFormData(prev => ({
+            ...prev,
+            documents: prev.documents.filter(d => d.id !== docId)
+        }));
+    };
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
-                <h3 className="text-xl font-bold mb-4">Modifier l'intervention</h3>
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto">
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold">Modifier l'intervention</h3>
+                    <button type="button" onClick={onCancel} className="p-1"><XIcon /></button>
+                </div>
                 <form onSubmit={handleSave} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Client</label>
@@ -532,7 +553,36 @@ const EditInterventionModal = ({ intervention, onSave, onCancel, users }) => {
                             {Object.values(users).filter(u => !u.isAdmin).map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
                         </select>
                     </div>
-                    <div className="flex justify-end gap-4 mt-6">
+
+                    <div className="border-t pt-4">
+                        <h4 className="text-lg font-semibold mb-2 text-slate-700">Gérer les documents</h4>
+                        {(formData.documents && formData.documents.length > 0) ? (
+                            <ul className="divide-y divide-slate-200 mb-4 max-h-40 overflow-y-auto">
+                                {formData.documents.map(doc => (
+                                    <li key={doc.id} className="py-2 flex justify-between items-center">
+                                        <span className="text-sm">{doc.name}</span>
+                                        <button type="button" onClick={() => handleDocumentDelete(doc.id)} className="p-1 text-red-500 hover:text-red-700">
+                                            <TrashIcon width={16} height={16} />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-sm text-slate-500 mb-2">Aucun document.</p>
+                        )}
+                        <div className="flex gap-2">
+                            <input 
+                                type="text" 
+                                value={newDocName} 
+                                onChange={(e) => setNewDocName(e.target.value)} 
+                                placeholder="Nom du nouveau document"
+                                className="flex-grow p-2 border border-slate-300 rounded"
+                            />
+                            <button type="button" onClick={handleDocumentAdd} className="px-4 py-2 bg-blue-500 text-white rounded font-semibold hover:bg-blue-600">Ajouter</button>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-end gap-4 pt-4 border-t">
                         <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-200 rounded-lg">Annuler</button>
                         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg">Sauvegarder</button>
                     </div>
