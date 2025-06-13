@@ -12,25 +12,29 @@ const CheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" heigh
 const XIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>;
 const PlusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>;
 const LayoutDashboardIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>;
-const EditIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>;
-const TrashIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>;
+const EditIcon = ({ width = 20, height = 20 }) => <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>;
+const TrashIcon = ({ width = 20, height = 20 }) => <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>;
 const ArchiveIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>;
 const DownloadIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>;
 const ChevronLeftIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>;
-const CameraIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>;
 const AlertTriangleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>;
 
-// --- Base de données de démonstration (Centralisée) ---
+// --- NOUVEAU : Modèle de permissions ---
+const ALL_PERMISSIONS = {
+    canModifyPlanning: "Modifier le planning et les documents associés",
+};
+
+// --- Base de données de démonstration (Mise à jour) ---
 const initialUsersData = {
-  "j.technicien": { password: "password123", name: "Jean Technicien", id: "user1", isAdmin: false },
-  "s.martin": { password: "password456", name: "Sophie Martin", id: "user2", isAdmin: false },
-  "admin": { password: "adminpassword", name: "Admin SRP", id: "admin_user", isAdmin: true },
+  "j.technicien": { password: "password123", name: "Jean Technicien", id: "user1", isAdmin: false, permissions: { canModifyPlanning: true } },
+  "s.martin": { password: "password456", name: "Sophie Martin", id: "user2", isAdmin: false, permissions: { canModifyPlanning: false } },
+  "admin": { password: "adminpassword", name: "Admin SRP", id: "admin_user", isAdmin: true, permissions: {} },
 };
 
 const initialInterventionsData = [
-    { id: "INT-101", userId: "user1", client: "Café de la Place", address: "1 Place de l'Église, 75006 Paris", service: "Réparation machine à café pro", date: "2025-06-09", time: "09:00", status: "À venir", isArchived: false, report: { notes: '', images: [], arrivalTime: null, departureTime: null, travelTime: '', signature: null } },
-    { id: "INT-102", userId: "user1", client: "Marie Dubois", address: "25 Rue de la Paix, 75002 Paris", service: "Changement de chauffe-eau", date: "2025-06-09", time: "11:30", status: "À venir", isArchived: false, report: { notes: '', images: [], arrivalTime: null, departureTime: null, travelTime: '', signature: null } },
-    { id: "INT-103", userId: "user2", client: "Boulangerie 'Au Bon Pain'", address: "88 Boulevard Voltaire, 75011 Paris", service: "Maintenance annuelle fournil", date: "2025-06-09", time: "14:00", status: "Terminée", isArchived: true, report: { notes: 'Maintenance effectuée avec succès.', images: [], arrivalTime: '2025-06-09T14:05:00', departureTime: '2025-06-09T15:30:00', travelTime: '30min', signature: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' } },
+    { id: "INT-101", userId: "user1", client: "Café de la Place", address: "1 Place de l'Église, 75006 Paris", service: "Réparation machine à café pro", date: "2025-06-09", time: "09:00", status: "À venir", isArchived: false, report: { notes: '', images: [], arrivalTime: null, departureTime: null, travelTime: '', signature: null }, documents: [{id: "doc1", name: "Devis_Machine_Cafe.pdf", url: "#"}] },
+    { id: "INT-102", userId: "user1", client: "Marie Dubois", address: "25 Rue de la Paix, 75002 Paris", service: "Changement de chauffe-eau", date: "2025-06-09", time: "11:30", status: "À venir", isArchived: false, report: { notes: '', images: [], arrivalTime: null, departureTime: null, travelTime: '', signature: null }, documents: [] },
+    { id: "INT-103", userId: "user2", client: "Boulangerie 'Au Bon Pain'", address: "88 Boulevard Voltaire, 75011 Paris", service: "Maintenance annuelle fournil", date: "2025-06-09", time: "14:00", status: "Terminée", isArchived: true, report: { notes: 'Maintenance effectuée avec succès.', images: [], arrivalTime: '2025-06-09T14:05:00', departureTime: '2025-06-09T15:30:00', travelTime: '30min', signature: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' }, documents: [{id: "doc2", name: "Rapport_Maintenance_Precedent.pdf", url: "#"}] },
 ];
 
 const initialPayslipsData = {
@@ -43,7 +47,7 @@ const initialLeaveRequestsData = [
     { id: "LR-02", userId: "user2", userName: "Sophie Martin", startDate: "2025-07-20", endDate: "2025-07-21", reason: "Weekend prolongé", status: "En attente" },
 ];
 
-// --- AMÉLIORATION : Composants UI (Toast & Modal) ---
+// --- Composants UI (Toast & Modal) ---
 
 const Toast = ({ message, type, onDismiss }) => {
     const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
@@ -67,7 +71,7 @@ const ConfirmationModal = ({ title, message, passwordPrompt, onConfirm, onCancel
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-4">
             <div className="bg-white p-6 md:p-8 rounded-lg shadow-xl w-full max-w-md m-4">
                 <div className="flex items-start">
                     <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -152,10 +156,13 @@ const GenericStatusBadge = ({ status, colorMap }) => {
 };
 
 // --- Vues Employé ---
-const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }) => {
+const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport, onUpdateIntervention, currentUser }) => {
     const [report, setReport] = useState(intervention.report);
     const signatureCanvasRef = useRef(null);
-
+    const [newDocName, setNewDocName] = useState("");
+    
+    const canModify = currentUser.isAdmin || (currentUser.permissions && currentUser.permissions.canModifyPlanning);
+    
     useEffect(() => {
         const canvas = signatureCanvasRef.current;
         if (canvas) {
@@ -164,14 +171,8 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }
             ctx.lineWidth = 2;
             let drawing = false;
 
-            const startDrawing = (e) => {
-                drawing = true;
-                draw(e);
-            };
-            const stopDrawing = () => {
-                drawing = false;
-                ctx.beginPath();
-            };
+            const startDrawing = (e) => { drawing = true; draw(e); };
+            const stopDrawing = () => { drawing = false; ctx.beginPath(); };
             const draw = (e) => {
                 if (!drawing) return;
                 const rect = canvas.getBoundingClientRect();
@@ -216,6 +217,25 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }
     
     const formatTime = (iso) => iso ? new Date(iso).toLocaleTimeString('fr-FR') : 'N/A';
     
+    const handleDocumentAdd = () => {
+        if (!newDocName) return;
+        const newDocument = { id: `doc-${Date.now()}`, name: newDocName, url: "#" };
+        const updatedIntervention = {
+            ...intervention,
+            documents: [...(intervention.documents || []), newDocument]
+        };
+        onUpdateIntervention(updatedIntervention);
+        setNewDocName("");
+    };
+
+    const handleDocumentDelete = (docId) => {
+        const updatedIntervention = {
+            ...intervention,
+            documents: intervention.documents.filter(d => d.id !== docId)
+        };
+        onUpdateIntervention(updatedIntervention);
+    };
+
     return (
         <div>
             <button onClick={onBack} className="flex items-center gap-2 text-blue-600 font-semibold mb-6 hover:underline"><ChevronLeftIcon /> Retour au planning</button>
@@ -223,6 +243,38 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }
                 <div>
                     <h2 className="text-2xl font-bold text-slate-800">{intervention.client}</h2>
                     <p className="text-slate-600">{intervention.service}</p>
+                </div>
+
+                <div className="border-t pt-4">
+                    <h3 className="text-lg font-semibold mb-2 text-slate-700">Documents Associés</h3>
+                    {(intervention.documents && intervention.documents.length > 0) ? (
+                        <ul className="divide-y divide-slate-200">
+                            {intervention.documents.map(doc => (
+                                <li key={doc.id} className="py-2 flex justify-between items-center">
+                                    <a href={doc.url} download={doc.name} className="text-blue-600 hover:underline">{doc.name}</a>
+                                    {canModify && (
+                                        <button onClick={() => handleDocumentDelete(doc.id)} className="p-1 text-red-500 hover:text-red-700">
+                                            <TrashIcon width={16} height={16} />
+                                        </button>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-sm text-slate-500">Aucun document attaché.</p>
+                    )}
+                    {canModify && (
+                        <div className="mt-4 flex gap-2">
+                            <input 
+                                type="text" 
+                                value={newDocName} 
+                                onChange={(e) => setNewDocName(e.target.value)} 
+                                placeholder="Nom du document (ex: devis.pdf)"
+                                className="flex-grow p-2 border border-slate-300 rounded"
+                            />
+                            <button onClick={handleDocumentAdd} className="px-4 py-2 bg-blue-500 text-white rounded font-semibold hover:bg-blue-600">Ajouter</button>
+                        </div>
+                    )}
                 </div>
                 
                 <div className="border-t pt-4">
@@ -264,19 +316,26 @@ const EmployeeInterventionDetailView = ({ intervention, onBack, onUpdateReport }
     );
 };
 
-const EmployeePlanningView = ({ interventions, onSelectIntervention }) => (
+const EmployeePlanningView = ({ interventions, onSelectIntervention, currentUser, onEditIntervention }) => (
     <div>
         <h2 className="text-3xl font-bold text-slate-800 mb-6">Votre Planning</h2>
         {interventions.length > 0 ? interventions.map(int => (
-            <div key={int.id} onClick={() => onSelectIntervention(int)} className="bg-white p-4 rounded-lg shadow-md mb-3 border-l-4 border-blue-500 cursor-pointer hover:bg-slate-50 transition">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <p className="font-semibold text-slate-800">{int.client}</p>
-                        <p className="text-sm text-slate-600">{int.service}</p>
+            <div key={int.id} className="bg-white rounded-lg shadow-md mb-3 border-l-4 border-blue-500 overflow-hidden">
+                <div onClick={() => onSelectIntervention(int)} className="p-4 cursor-pointer hover:bg-slate-50 transition">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <p className="font-semibold text-slate-800">{int.client}</p>
+                            <p className="text-sm text-slate-600">{int.service}</p>
+                        </div>
+                        <GenericStatusBadge status={int.status} colorMap={{ "À venir": "bg-blue-100 text-blue-800", "Terminée": "bg-green-100 text-green-800" }}/>
                     </div>
-                    <GenericStatusBadge status={int.status} colorMap={{ "À venir": "bg-blue-100 text-blue-800", "Terminée": "bg-green-100 text-green-800" }}/>
+                    <p className="text-sm text-slate-500 mt-2">{int.date} à {int.time}</p>
                 </div>
-                <p className="text-sm text-slate-500 mt-2">{int.date} à {int.time}</p>
+                {(currentUser.permissions && currentUser.permissions.canModifyPlanning && int.userId === currentUser.id && !int.isArchived) && (
+                     <div className="border-t bg-slate-50 px-4 py-2 text-right">
+                        <button onClick={() => onSelectIntervention(int)} className="text-sm font-semibold text-blue-600 hover:underline">Voir détails et modifier les documents</button>
+                    </div>
+                )}
             </div>
         )) : 
         <div className="bg-white p-6 rounded-lg shadow-md text-center text-slate-500">
@@ -374,14 +433,14 @@ const AdminDashboard = ({ interventions, leaveRequests }) => {
     )
 };
 
-const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive, onDelete }) => {
+const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive, onDelete, onEdit, onSelectIntervention }) => {
     const [showForm, setShowForm] = useState(false);
     const [formValues, setFormValues] = useState({ userId: '', client: '', address: '', service: '', date: '', time: '' });
     
     const handleInputChange = (e) => setFormValues({...formValues, [e.target.name]: e.target.value});
     const handleSubmit = (e) => {
         e.preventDefault();
-        onAddIntervention({ ...formValues, id: `INT-${Date.now()}`, status: 'À venir', isArchived: false, report: { notes: '', images: [], arrivalTime: null, departureTime: null, travelTime: '', signature: null } });
+        onAddIntervention({ ...formValues, id: `INT-${Date.now()}`, status: 'À venir', isArchived: false, report: { notes: '', images: [], arrivalTime: null, departureTime: null, travelTime: '', signature: null }, documents: [] });
         setShowForm(false);
         setFormValues({ userId: '', client: '', address: '', service: '', date: '', time: '' });
     };
@@ -411,14 +470,15 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
             <div className="bg-white p-6 rounded-lg shadow">
                  <ul className="divide-y divide-slate-200">
                     {interventions.map(int => (<li key={int.id} className="py-3 flex justify-between items-center">
-                        <div>
+                        <div className="flex-grow cursor-pointer" onClick={() => onSelectIntervention(int)}>
                             <p className="font-semibold text-slate-800">{int.client} - {int.service}</p>
                             <p className="text-sm text-slate-600">Assigné à: {(Object.values(users).find(u => u.id === int.userId) || { name: 'Inconnu' }).name}</p>
                             <p className="text-sm text-slate-500">{int.date} à {int.time}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                             <button onClick={() => onArchive(int.id)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
-                             <button onClick={() => onDelete(int.id)} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full" title="Supprimer"><TrashIcon/></button>
+                             <button onClick={(e) => { e.stopPropagation(); onEdit(int); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Modifier les détails"><EditIcon/></button>
+                             <button onClick={(e) => { e.stopPropagation(); onArchive(int.id); }} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full" title="Archiver"><ArchiveIcon/></button>
+                             <button onClick={(e) => { e.stopPropagation(); onDelete(int.id); }} className="p-2 text-slate-600 hover:text-red-600 hover:bg-slate-100 rounded-full" title="Supprimer"><TrashIcon/></button>
                         </div>
                     </li>))}
                 </ul>
@@ -426,6 +486,62 @@ const AdminPlanningView = ({ interventions, users, onAddIntervention, onArchive,
         </div>
     )
 };
+
+const EditInterventionModal = ({ intervention, onSave, onCancel, users }) => {
+    const [formData, setFormData] = useState(intervention);
+    
+    useEffect(() => {
+        setFormData(intervention);
+    }, [intervention]);
+    
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        onSave(formData);
+    };
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
+                <h3 className="text-xl font-bold mb-4">Modifier l'intervention</h3>
+                <form onSubmit={handleSave} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Client</label>
+                        <input name="client" value={formData.client} onChange={handleChange} placeholder="Nom du client" required className="w-full p-2 border rounded mt-1"/>
+                    </div>
+                     <div>
+                        <label className="block text-sm font-medium text-gray-700">Adresse</label>
+                        <input name="address" value={formData.address} onChange={handleChange} placeholder="Adresse" required className="w-full p-2 border rounded mt-1"/>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                           <label className="block text-sm font-medium text-gray-700">Date</label>
+                           <input name="date" type="date" value={formData.date} onChange={handleChange} required className="w-full p-2 border rounded mt-1"/>
+                        </div>
+                        <div>
+                           <label className="block text-sm font-medium text-gray-700">Heure</label>
+                           <input name="time" type="time" value={formData.time} onChange={handleChange} required className="w-full p-2 border rounded mt-1"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Assigner à</label>
+                        <select name="userId" value={formData.userId} onChange={handleChange} required className="w-full p-2 border rounded mt-1">
+                            {Object.values(users).filter(u => !u.isAdmin).map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
+                        </select>
+                    </div>
+                    <div className="flex justify-end gap-4 mt-6">
+                        <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-200 rounded-lg">Annuler</button>
+                        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
 
 const AdminArchivesView = ({ interventions, users }) => (
     <div>
@@ -484,6 +600,16 @@ const EditUserModal = ({ user, onSave, onCancel }) => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    const handlePermissionChange = (permKey, isChecked) => {
+        setFormData(prev => ({
+            ...prev,
+            permissions: {
+                ...prev.permissions,
+                [permKey]: isChecked
+            }
+        }));
+    };
     
     const handleSave = (e) => {
         e.preventDefault();
@@ -491,7 +617,7 @@ const EditUserModal = ({ user, onSave, onCancel }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-bold">Modifier le compte</h3>
@@ -504,12 +630,32 @@ const EditUserModal = ({ user, onSave, onCancel }) => {
                     </div>
                      <div>
                         <label className="block text-sm font-medium text-gray-700">Identifiant de connexion</label>
-                        <input name="username" value={formData.username || Object.keys(user)[0]} onChange={handleChange} className="w-full p-2 border rounded mt-1"/>
+                        <input name="username" value={formData.username} onChange={handleChange} className="w-full p-2 border rounded mt-1" readOnly={user.isAdmin}/>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Nouveau mot de passe (laisser vide pour ne pas changer)</label>
                         <input name="newPassword" type="password" value={formData.newPassword} onChange={handleChange} placeholder="••••••••" className="w-full p-2 border rounded mt-1"/>
                     </div>
+                    
+                    {!user.isAdmin && (
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Permissions</label>
+                            <div className="mt-2 space-y-2">
+                                {Object.entries(ALL_PERMISSIONS).map(([key, label]) => (
+                                    <label key={key} className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            checked={!!formData.permissions?.[key]}
+                                            onChange={(e) => handlePermissionChange(key, e.target.checked)}
+                                        />
+                                        <span className="ml-2 text-sm text-gray-600">{label}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
                         <p className="font-bold">Vérification requise</p>
                         <p>Pour enregistrer les modifications, veuillez entrer votre mot de passe administrateur.</p>
@@ -538,7 +684,8 @@ const AdminUserView = ({ users, currentUser, onAddUser, onUpdateUser, onDeleteUs
         onAddUser({
             ...addFormValues,
             id: `user-${Date.now()}`,
-            isAdmin: false
+            isAdmin: false,
+            permissions: {} // Permissions par défaut
         }, adminPasswordForAdd);
         setShowAddForm(false);
         setAddFormValues({ name: '', username: '', password: '' });
@@ -549,7 +696,7 @@ const AdminUserView = ({ users, currentUser, onAddUser, onUpdateUser, onDeleteUs
         onUpdateUser(updatedUserData, passwordToCheck);
         setEditingUser(null);
     };
-
+    
     const adminUser = Object.values(users).find(u => u.isAdmin);
     const adminUsername = Object.keys(users).find(key => users[key].id === adminUser.id);
 
@@ -589,11 +736,14 @@ const AdminUserView = ({ users, currentUser, onAddUser, onUpdateUser, onDeleteUs
 
             <div className="bg-white p-6 rounded-lg shadow">
                  <ul className="divide-y divide-slate-200">
-                    {Object.entries(users).filter(([username, u]) => !u.isAdmin).map(([username, u]) => (
+                    {Object.entries(users).filter(([, u]) => !u.isAdmin).map(([username, u]) => (
                         <li key={u.id} className="py-3 flex justify-between items-center">
                             <div>
                                 <p className="font-semibold">{u.name}</p>
                                 <p className="text-sm text-slate-500">{username}</p>
+                                <div className="flex gap-2 mt-1">
+                                    {u.permissions?.canModifyPlanning && <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">Modif. Planning</span>}
+                                </div>
                             </div>
                             <div className="flex items-center gap-2">
                                 <button onClick={() => setEditingUser(u)} className="p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full"><EditIcon/></button>
@@ -618,7 +768,7 @@ const AdminVaultView = ({ users, allPayslips, onAddPayslip, showToast }) => {
     return (<div><div className="flex justify-between items-center mb-6"><h3 className="text-xl font-bold text-slate-800">Gestion des Coffres-forts</h3><button onClick={() => setShowAddForm(!showAddForm)} className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">{showAddForm ? 'Annuler' : 'Ajouter Fiche de Paie'}</button></div>{showAddForm && (<div className="bg-white p-6 rounded-lg shadow-md mb-6"><form onSubmit={handleAddSubmit} className="space-y-4"><h3 className="text-xl font-semibold text-slate-800">Ajouter une Fiche de Paie</h3><div><label>Employé</label><select value={formUserId} onChange={e => setFormUserId(e.target.value)} required className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div><div className="grid md:grid-cols-2 gap-4"><div><label>Mois (ex: Juin 2025)</label><input type="text" value={formMonth} onChange={e => setFormMonth(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div><div><label>Date de réception</label><input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} required className="mt-1 block w-full p-2 border rounded"/></div></div><div><label>Fichier PDF (simulation)</label><input type="file" className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/></div><button type="submit" className="w-full py-2 font-semibold text-white bg-blue-600 rounded-lg">Valider</button></form></div>)}{<div className="bg-white p-6 rounded-lg shadow-md"> <h3 className="text-xl font-semibold text-slate-800 mb-4">Consulter un coffre-fort</h3><div><label>Sélectionner un employé</label><select value={selectedUserId} onChange={e => setSelectedUserId(e.target.value)} className="mt-1 block w-full p-2 border rounded"><option value="">-- Sélectionner --</option>{employees.map(emp => <option key={emp.id} value={emp.id}>{emp.name}</option>)}</select></div>{selectedUserId && (<div className="mt-6"><h4 className="font-semibold">Documents pour {(Object.values(users).find(u=>u.id === selectedUserId) || {name: 'Inconnu'}).name}</h4><ul className="divide-y mt-2">{(allPayslips[selectedUserId] || []).length > 0 ? (allPayslips[selectedUserId] || []).map(doc => <li key={doc.id} className="py-3 flex justify-between items-center"><div><p>{doc.month}</p><p className="text-sm text-slate-500">{doc.date}</p></div><a href={doc.url} download className="text-blue-500 hover:underline text-sm">Télécharger</a></li>) : <p className="text-slate-500 mt-2">Aucun document.</p>}</ul></div>)}</div>}</div>);
 };
 
-const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention, showToast }) => {
+const AdminMasterView = ({ users, interventions, leaveRequests, payslips, currentUser, onAddIntervention, onUpdateLeaveStatus, onAddUser, onUpdateUser, onDeleteUser, onAddPayslip, onArchiveIntervention, onDeleteIntervention, onEditIntervention, onSelectIntervention, showToast }) => {
     const [adminView, setAdminView] = useState('dashboard');
     const adminTabs = [
         { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboardIcon /> },
@@ -641,7 +791,7 @@ const AdminMasterView = ({ users, interventions, leaveRequests, payslips, curren
                 </nav>
             </div>
             {adminView === 'dashboard' && <AdminDashboard interventions={interventions} leaveRequests={leaveRequests} />}
-            {adminView === 'planning' && <AdminPlanningView interventions={interventions.filter(i => !i.isArchived)} users={users} onAddIntervention={onAddIntervention} onArchive={onArchiveIntervention} onDelete={onDeleteIntervention} />}
+            {adminView === 'planning' && <AdminPlanningView interventions={interventions.filter(i => !i.isArchived)} users={users} onAddIntervention={onAddIntervention} onArchive={onArchiveIntervention} onDelete={onDeleteIntervention} onEdit={onEditIntervention} onSelectIntervention={onSelectIntervention} />}
             {adminView === 'leaves' && <AdminLeaveView leaveRequests={leaveRequests} onUpdateRequestStatus={onUpdateLeaveStatus} />}
             {adminView === 'users' && <AdminUserView users={users} currentUser={currentUser} onAddUser={onAddUser} onUpdateUser={onUpdateUser} onDeleteUser={onDeleteUser} />}
             {adminView === 'vaults' && <AdminVaultView users={users} allPayslips={payslips} onAddPayslip={onAddPayslip} showToast={showToast} />}
@@ -653,7 +803,6 @@ const AdminMasterView = ({ users, interventions, leaveRequests, payslips, curren
 
 // --- Application principale ---
 function App() {
-  // --- AMÉLIORATION : Chargement depuis le localStorage ---
   const loadState = (key, initialState) => {
       try {
           const serializedState = localStorage.getItem(key);
@@ -668,21 +817,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentView, setCurrentView] = useState('planning');
   const [selectedIntervention, setSelectedIntervention] = useState(null);
+  const [editingIntervention, setEditingIntervention] = useState(null);
   
   const [users, setUsers] = useState(() => loadState('srp_users', initialUsersData));
   const [interventions, setInterventions] = useState(() => loadState('srp_interventions', initialInterventionsData));
   const [payslips, setPayslips] = useState(() => loadState('srp_payslips', initialPayslipsData));
   const [leaveRequests, setLeaveRequests] = useState(() => loadState('srp_leave_requests', initialLeaveRequestsData));
 
-  // --- AMÉLIORATION : Sauvegarde dans le localStorage ---
   useEffect(() => { localStorage.setItem('srp_users', JSON.stringify(users)); }, [users]);
   useEffect(() => { localStorage.setItem('srp_interventions', JSON.stringify(interventions)); }, [interventions]);
   useEffect(() => { localStorage.setItem('srp_payslips', JSON.stringify(payslips)); }, [payslips]);
   useEffect(() => { localStorage.setItem('srp_leave_requests', JSON.stringify(leaveRequests)); }, [leaveRequests]);
 
-  // --- AMÉLIORATION : État pour les notifications Toast et Modales ---
-  const [toast, setToast] = useState(null); // ex: { message: 'Hello', type: 'success' }
-  const [modal, setModal] = useState(null); // ex: { title: 'Confirmer ?', message: '...', onConfirm: () => {} }
+  const [toast, setToast] = useState(null);
+  const [modal, setModal] = useState(null);
 
   const showToast = (message, type = 'success') => setToast({ message, type });
   const showModal = (config) => setModal(config);
@@ -694,6 +842,7 @@ function App() {
   const handleLogout = () => {
     setCurrentUser(null);
     setSelectedIntervention(null);
+    setEditingIntervention(null);
   };
   
   const handleAddUser = (newUser, adminPassword) => {
@@ -724,24 +873,22 @@ function App() {
           let userToUpdate = { ...newUsers[oldUsername] };
           
           userToUpdate.name = updatedUserData.name;
-          // Note: l'identifiant est la clé, sa modification est plus complexe
+          userToUpdate.permissions = updatedUserData.permissions || {};
           if (updatedUserData.newPassword) {
               userToUpdate.password = updatedUserData.newPassword;
           }
           
-          // Gérer le changement de nom d'utilisateur (clé de l'objet)
-          if (oldUsername !== newUsername) {
+          if (oldUsername !== newUsername && !userToUpdate.isAdmin) {
               if (newUsers[newUsername]) {
                   showToast("Le nouvel identifiant est déjà utilisé par un autre compte.", "error");
-                  return prev; // Annuler la mise à jour
+                  return prev;
               }
-              delete newUsers[oldUsername]; // Supprimer l'ancienne entrée
-              newUsers[newUsername] = userToUpdate; // Ajouter la nouvelle
+              delete newUsers[oldUsername];
+              newUsers[newUsername] = userToUpdate;
           } else {
-              newUsers[oldUsername] = userToUpdate; // Mettre à jour en place
+              newUsers[oldUsername] = userToUpdate;
           }
           
-          // Mettre à jour l'utilisateur courant si c'est lui qui est modifié
           if(userToUpdate.id === currentUser.id) {
               setCurrentUser(userToUpdate);
           }
@@ -755,7 +902,7 @@ function App() {
   const handleDeleteUser = (userIdToDelete) => {
       showModal({
           title: "Supprimer l'employé ?",
-          message: "Cette action est irréversible. Toutes les données associées (interventions, etc.) ne seront plus correctement assignées.",
+          message: "Cette action est irréversible. Toutes les données associées pourraient être perdues.",
           passwordPrompt: true,
           onConfirm: (adminPassword) => {
               if (adminPassword !== currentUser.password) {
@@ -780,6 +927,15 @@ function App() {
       setInterventions(prev => [...prev, intervention].sort((a,b) => new Date(a.date) - new Date(b.date)));
       showToast("Intervention ajoutée au planning.");
   };
+  
+  const handleUpdateIntervention = (updatedIntervention) => {
+      setInterventions(prev => prev.map(i => i.id === updatedIntervention.id ? updatedIntervention : i));
+      if (selectedIntervention?.id === updatedIntervention.id) {
+        setSelectedIntervention(updatedIntervention);
+      }
+      setEditingIntervention(null);
+      showToast("Intervention mise à jour.");
+  };
 
   const handleUpdateLeaveStatus = (requestId, status) => {
       setLeaveRequests(prev => prev.map(req => req.id === requestId ? { ...req, status } : req));
@@ -788,7 +944,8 @@ function App() {
 
   const handleAddPayslip = ({ userId, payslip }) => {
       setPayslips(prev => ({ ...prev, [userId]: [...(prev[userId] || []), payslip] }));
-      const userName = users[Object.keys(users).find(key => users[key].id === userId)]?.name || 'Inconnu';
+      const userKey = Object.keys(users).find(key => users[key].id === userId);
+      const userName = userKey ? users[userKey].name : 'Inconnu';
       showToast(`Fiche de paie ajoutée pour ${userName}.`);
   };
 
@@ -843,9 +1000,16 @@ function App() {
 
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
-      {/* AMÉLIORATION : Rendu conditionnel des notifications */}
       {toast && <Toast message={toast.message} type={toast.type} onDismiss={() => setToast(null)} />}
       {modal && <ConfirmationModal {...modal} />}
+      {editingIntervention && (
+          <EditInterventionModal
+              intervention={editingIntervention}
+              onSave={handleUpdateIntervention}
+              onCancel={() => setEditingIntervention(null)}
+              users={users}
+          />
+      )}
 
       <header className="bg-white shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -883,6 +1047,8 @@ function App() {
                 onAddPayslip={handleAddPayslip}
                 onArchiveIntervention={handleArchiveIntervention}
                 onDeleteIntervention={handleDeleteIntervention}
+                onEditIntervention={setEditingIntervention}
+                onSelectIntervention={setSelectedIntervention}
                 showToast={showToast}
             />
         ) : (
@@ -892,10 +1058,12 @@ function App() {
                     intervention={selectedIntervention}
                     onBack={() => setSelectedIntervention(null)}
                     onUpdateReport={handleUpdateInterventionReport}
+                    onUpdateIntervention={handleUpdateIntervention}
+                    currentUser={currentUser}
                  />
               ) : (
                 <>
-                  {currentView === 'planning' && <EmployeePlanningView interventions={interventions.filter(i => i.userId === currentUser.id && !i.isArchived)} onSelectIntervention={setSelectedIntervention} />}
+                  {currentView === 'planning' && <EmployeePlanningView interventions={interventions.filter(i => i.userId === currentUser.id && !i.isArchived)} onSelectIntervention={setSelectedIntervention} currentUser={currentUser} onEditIntervention={setEditingIntervention} />}
                   {currentView === 'leaves' && <EmployeeLeaveView leaveRequests={leaveRequests.filter(r => r.userId === currentUser.id)} onSubmitRequest={handleAddLeaveRequest} userName={currentUser.name} showToast={showToast} />}
                   {currentView === 'vault' && <CoffreNumeriqueView payslips={payslips[currentUser.id] || []} />}
                 </>
